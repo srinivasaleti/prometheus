@@ -5,7 +5,11 @@ services:
       - 9080:9080
     volumes:
       - prometheus-data:/prometheus
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./config
+          target: /etc/prometheus
     command: --web.enable-lifecycle --web.listen-address=:9080 --config.file=/etc/prometheus/prometheus.yml
-
 volumes:
   prometheus-data:
