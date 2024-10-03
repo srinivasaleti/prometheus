@@ -1,0 +1,40 @@
+In Prometheus (and statistics in general), percentiles and quantiles are used to describe the distribution of data points. They help you understand how values are spread and where most of the data lies.
+
+## Percentiles and Quantiles: A Quick Overview
+* Percentile:
+
+    - A percentile indicates the value below which a given percentage of observations fall.
+
+    - *Example:* If a request duration is in the 90th percentile, 90% of all requests are faster than that duration, and 10% are slower.
+* Quantile:
+
+    -  A quantile is a more general term. 
+    - *Example*: The 0.90 quantile (or 90th percentile) is the value below which 90% of the observations lie.
+    - Quantiles can represent any fraction of the data (like 0.5, 0.75, etc.), whereas percentiles refer to values based on 100 divisions (e.g., 50th, 90th, 95th percentile).
+
+
+# Example with Real-Life Scenario
+Imagine you're tracking response times for HTTP requests, and you record the following times in seconds for 10 requests:
+
+`[0.1, 0.2, 0.15, 0.3, 0.25, 0.4, 0.35, 0.6, 0.5, 0.7]`
+
+## Calculating Percentiles
+* 50th Percentile (or 0.50 Quantile):
+
+    - This is the median: half of the requests are faster than this time, and half are slower.
+Sort the data: [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.5, 0.6, 0.7].
+In this example, the 50th percentile is the average of the 5th and 6th values: (0.3 + 0.35)/2 = 0.325.
+    - Interpretation: 50% of requests are faster than 0.325 seconds, and 50% are slower.
+
+* 90th Percentile (or 0.90 Quantile):
+
+    - 90% of the requests are faster than this value, and 10% are slower.
+In our sorted list, the 90th percentile is between the 9th and 10th value: (0.6 + 0.7)/2 = 0.65.
+    - Interpretation: 90% of requests are faster than 0.65 seconds, and 10% are slower.
+
+## Use cases
+- Database Query Latency: Use percentiles to track query response times and identify slow queries.
+- API Response Size: Measure the size of responses and identify outliers.
+- HTTP Request Success Rates: Track the success rate of HTTP requests to ensure system reliability.
+- Memory Usage Monitoring: Use percentiles to monitor application memory usage and detect outliers.
+- Network Latency: Identify slow network requests and outliers in latency.

@@ -15,17 +15,21 @@ Prometheus supports four primary metric types:
 - **Counter:**
   - A monotonically increasing value that represents the number of times something occurred.
   - Example: `http_requests_total` (counting the total number of HTTP requests).
-  
+  - Most of the times Counter always increases, however in scenarios like crashes counter resets to 0.
+  - Do not use a counter to expose a value that can decrease. For example, do not use a counter for the number of currently running processes; instead use a gauge.
+
 - **Gauge:**
   - Represents a value that can go up or down, such as CPU usage or memory consumption.
   - Example: `memory_usage_bytes`.
   
 - **Histogram:**
-  - Measures the distribution of values (e.g., response times). It includes a count, sum, and a series of buckets representing value ranges.
+  -  Histograms are used to observe and bucket data over time (like request durations or response sizes) into predefined ranges (buckets).
+  - Example Use Case: Measuring the response time of an HTTP request.
   - Example: `http_request_duration_seconds`.
   
 - **Summary:**
   - Similar to histograms but provides quantiles (e.g., 95th percentile of response time) for aggregated data.
+  -  Example Use Case: Measuring the size of HTTP responses and wanting to know the 95th percentile size.
   - Example: `http_request_latency_seconds`.
 
 ### 3. **Labels**
